@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/Users/kenna/AndroidStudioProjects/Abscan/app/src/main/res/drawable/rounded_button.xml" value="0.3615" />
         <entry key="..\:/Users/kenna/AndroidStudioProjects/Abscan/app/src/main/res/drawable/scan.xml" value="0.3615" />
+        <entry key="..\:/Users/kenna/AndroidStudioProjects/Abscan/app/src/main/res/layout/activity_login.xml" value="0.3625" />
         <entry key="..\:/Users/kenna/AndroidStudioProjects/Abscan/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/kenna/AndroidStudioProjects/Abscan/app/src/main/res/layout/activity_present.xml" value="0.3179347826086957" />
+        <entry key="..\:/Users/kenna/AndroidStudioProjects/Abscan/app/src/main/res/layout/activity_register_user.xml" value="0.3625" />
       </map>
     </option>
   </component>

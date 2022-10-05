@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentActivity">
+
+    <GridLayout
+        android:id="@+id/button_back_to_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:padding="10dp"
+        android:rowCount="1"
+        app:layout_constraintTop_toBottomOf="@+id/text_class_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="24dp"
+        >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/signout"
+            android:backgroundTint="@color/blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/kgprimarypenmanship"
+            android:text="Back"
+            android:textColor="@color/blue"
+            android:textSize="16dp" />
+    </GridLayout>
+
+    <ImageView
+        android:id="@+id/image_present"
+        android:layout_width="600px"
+        android:layout_height="600px"
+        android:background="@drawable/image_present"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/text_present"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You are present!"
+        android:fontFamily="@font/kgprimarypenmanship"
+        android:textSize="144px"
+        android:textColor="@color/blue"
+        app:layout_constraintTop_toBottomOf="@+id/image_present"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/text_class_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Class_name"
+        android:fontFamily="@font/kgprimarypenmanship"
+        android:textSize="72px"
+        android:textColor="@color/red"
+        app:layout_constraintTop_toBottomOf="@+id/text_present"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

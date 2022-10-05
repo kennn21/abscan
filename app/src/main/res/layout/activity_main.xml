@@ -10,6 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <GridLayout
+            android:id="@+id/button_signout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:padding="10dp"
+            android:rowCount="1">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/signout"
+                android:backgroundTint="@color/blue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/kgprimarypenmanship"
+                android:text="Sign out"
+                android:textColor="@color/blue"
+                android:textSize="16dp" />
+        </GridLayout>
+
         <LinearLayout
             android:id="@+id/button_checkin"
             android:layout_width="wrap_content"
