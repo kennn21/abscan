@@ -7,6 +7,7 @@ import android.provider.ContactsContract
 import android.util.Patterns
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.*
@@ -27,6 +28,9 @@ class RegisterUser : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_user)
+        val scrollView = findViewById<ScrollView>(R.id.scrollView)
+        val wideView = findViewById<ConstraintLayout>(R.id.wideview)
+        wideView.apply { post { scrollView.scrollTo(0, (left + right - scrollView.height) / 2) } }
         supportActionBar?.hide()
 
 
