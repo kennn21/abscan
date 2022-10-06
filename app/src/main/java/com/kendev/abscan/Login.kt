@@ -18,6 +18,8 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        supportActionBar?.hide()
+
         // Initialize Firebase Auth
         auth = Firebase.auth
         if(FirebaseAuth.getInstance().getCurrentUser() != null){

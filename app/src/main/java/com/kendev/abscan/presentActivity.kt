@@ -12,6 +12,8 @@ class presentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_present)
+        supportActionBar?.hide()
+
         val text_class_name = findViewById<TextView>(R.id.text_class_name)
 //        text_class_name.setText(SharedVariables().class_name)
 

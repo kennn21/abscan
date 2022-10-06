@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
+
         val scanButton:LinearLayout = findViewById(R.id.button_checkin)
         scanButton.setOnClickListener({
             val intentIntegrator = IntentIntegrator(this)
