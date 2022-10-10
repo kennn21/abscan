@@ -8,7 +8,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
 
 
         <GridLayout
@@ -17,7 +19,10 @@
             android:layout_height="wrap_content"
             android:columnCount="2"
             android:padding="10dp"
-            android:rowCount="1">
+            android:rowCount="1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            >
 
             <ImageView
                 android:layout_width="24dp"
@@ -36,35 +41,81 @@
         </GridLayout>
 
         <LinearLayout
-            android:id="@+id/button_checkin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:padding="4dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="100dp"
-            >
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/scan"
-                android:backgroundTint="@color/blue"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Check in"
-                android:textSize="48px"
-                android:textColor="@color/blue"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:textAlignment="center"
-                android:gravity="center"
-                />
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
 
+            <RelativeLayout
+                android:id="@+id/template_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:padding="10dp"
+                android:background="@drawable/round_rect_shape">
+
+                <LinearLayout
+                    android:id="@+id/button_check_schedules"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/schedules"
+                        android:backgroundTint="@color/blue"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Schedules"
+                        android:textSize="48px"
+                        android:textColor="@color/blue"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/button_checkin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button"
+                    android:backgroundTint="?colorOnPrimary"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/scan"
+                        android:backgroundTint="@color/blue"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Check in"
+                        android:textSize="48px"
+                        android:textColor="@color/blue"
+                        android:layout_centerHorizontal="true"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
+
+
+
     </RelativeLayout>
 
 

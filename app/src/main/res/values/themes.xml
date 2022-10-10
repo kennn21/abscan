@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/dark_blue</item>
-        <item name="colorOnPrimary">@color/light_gray</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/red</item>
         <item name="colorSecondaryVariant">@color/gray</item>
@@ -14,4 +14,10 @@
         <!-- Customize your theme here. -->
 
     </style>
+    <style name="Theme.Abscan.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Abscan.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Abscan.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
