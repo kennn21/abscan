@@ -3,26 +3,20 @@ package com.kendev.abscan
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Patterns
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.*
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
-import org.checkerframework.common.returnsreceiver.qual.This
-import org.w3c.dom.Text
-import java.util.*
-import kotlin.collections.HashMap
 
 
 class RegisterUser : AppCompatActivity() {
-
+    private lateinit var rdb: DatabaseReference
     private lateinit var auth: FirebaseAuth
     val database = Firebase.database
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +43,6 @@ class RegisterUser : AppCompatActivity() {
         val button_register = findViewById<Button>(R.id.button_signup)
         button_register.setOnClickListener(){
             validateCreds(image_loading)
-
         }
     }
 
@@ -83,7 +76,7 @@ class RegisterUser : AppCompatActivity() {
                 ).show()
             } else{
                 toggleLoad(loading)
-                performSignUp(email, password)
+                performSignUp(email, password, fullName, nim)
                 toggleLoad(loading)
 //                val uid = auth.uid
 //                val database = FirebaseDatabase.getInstance().getReference("users")
@@ -118,11 +111,30 @@ class RegisterUser : AppCompatActivity() {
         }
     }
 
-    private fun performSignUp(email:String,password:String) {
+    private fun saveUserInfo(uid:String, fullname:String, email: String, nim:String){
+        rdb = FirebaseDatabase.getInstance().getReference("Users")
+        val newUser = newUser(uid, fullname, email, nim)
+        rdb.child(uid).setValue(newUser).addOnSuccessListener {
+            Toast.makeText(this, " Succesfully saved! ", Toast.LENGTH_SHORT).show()
+        }
+            .addOnFailureListener {
+                Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun performSignUp(email:String,password:String, fullname: String, nim: String) {
         auth.createUserWithEmailAndPassword(email,password)
             .addOnCompleteListener(this){ task ->
                 if (task.isSuccessful) {
                     // Sign up success
+
+                    //save user info
+                    val currUser = auth.currentUser
+                    val currUid =  currUser?.uid
+                    saveUserInfo( currUid.toString(), fullname, email, nim)
+//                    Toast.makeText(this, " ${currUid} ",Toast.LENGTH_SHORT).show()
+
+                    //Redirect to main act
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {

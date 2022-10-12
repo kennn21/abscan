@@ -4,11 +4,16 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.*
+import androidx.annotation.NonNull
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -20,13 +25,27 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var drawer : DrawerLayout
+
     lateinit var rv_history_attendance: RecyclerView
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportActionBar?.hide()
+
+//        val toolbar: Toolbar = findViewById(R.id.toolbar)
+//        setSupportActionBar(toolbar)
+//        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        drawer = findViewById(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
+
+        val toggle: ActionBarDrawerToggle = ActionBarDrawerToggle(this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
 
         // Initialize Firebase Auth
         auth = Firebase.auth
@@ -38,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
 
-//getuserinfo
+        //getuserinfo
         val scanButton:LinearLayout = findViewById(R.id.button_checkin)
         scanButton.setOnClickListener({
             val intentIntegrator = IntentIntegrator(this)
@@ -77,15 +96,22 @@ class MainActivity : AppCompatActivity() {
                         for(cls in res2){
                             for(atd in result){
                                 if(atd.data["class_code"] == cls.data["code"]){
-                                    data.add(ItemsViewModel(
-                                        "${cls.data["name"]}" +
-                                                "\n" +
-                                                "${atd.data["date"]}" +
-                                                "\n" +
-                                                "${atd.data["time"]}" +
-                                                "\n" +
-                                                "${getUserInfo(atd.data["uid"].toString())}"))
+                                    val user = Firebase.auth.currentUser
+                                    val currUid = user?.uid
+                                    if(atd.data["uid"].toString() == currUid.toString()){
+                                        data.add(ItemsViewModel(
+                                            "${cls.data["name"]}" +
+                                                    "\n" +
+                                                    "${atd.data["date"]}" +
+                                                    "\n" +
+                                                    "${atd.data["time"]}" +
+                                                    "\n" +
+                                                    "${getUserInfo(atd.data["uid"].toString())}"))
+                                    }
                                 }
+                            }
+                            if(data.isEmpty()){
+                                data.add(ItemsViewModel("No attendance found!"))
                             }
                         }
                         val adapter = CustomAdapter(data)
@@ -101,8 +127,27 @@ class MainActivity : AppCompatActivity() {
     fun getUserInfo(uid:String): String? {
             val user = Firebase.auth.currentUser
             val email = user?.email
-            Toast.makeText(baseContext, "${email}",Toast.LENGTH_LONG).show()
+//            Toast.makeText(baseContext, "${email}",Toast.LENGTH_LONG).show()
             return email
+    }
+
+    override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_user -> {
+                val intent = Intent(this, UserActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START)
+        } else{
+            super.onBackPressed()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

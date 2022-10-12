@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "435803615747",
+    "firebase_url": "https://abscan-6ffc1-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "abscan-6ffc1",
+    "storage_bucket": "abscan-6ffc1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435803615747:android:a50164e149b744a36c5436",
+        "android_client_info": {
+          "package_name": "com.kendev.abscan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435803615747-ggsnk1hptda1v8gh0eljhmproq7ft3j2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS2SvVRHQX2Ea-P-GCGfN0NTHAKxh1I_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "435803615747-ggsnk1hptda1v8gh0eljhmproq7ft3j2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
