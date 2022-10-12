@@ -1,13 +1,16 @@
 package com.kendev.abscan
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.libraries.places.api.model.LocalTime
+import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.zxing.integration.android.IntentIntegrator
@@ -16,17 +19,32 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
+    lateinit var rv_history_attendance: RecyclerView
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            var intent = Intent(this, Login::class.java)
+            startActivity(intent)
+        }
+
+        val db = Firebase.firestore
+
+//getuserinfo
         val scanButton:LinearLayout = findViewById(R.id.button_checkin)
         scanButton.setOnClickListener({
             val intentIntegrator = IntentIntegrator(this)
-
             intentIntegrator.setDesiredBarcodeFormats(listOf(IntentIntegrator.QR_CODE))
+            intentIntegrator.setCameraId(0)
+            intentIntegrator.setOrientationLocked(false)
             intentIntegrator.initiateScan()
         })
 
@@ -43,6 +61,48 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        rv_history_attendance = findViewById(R.id.rv_history_attendance)
+
+        rv_history_attendance.layoutManager = LinearLayoutManager(this)
+
+        db.collection("attendance_history")
+            .get().addOnSuccessListener { result ->
+
+                val db = Firebase.firestore
+                db.collection("classes")
+                    .get()
+                    .addOnSuccessListener { res2->
+                        val data = ArrayList<ItemsViewModel>()
+
+                        for(cls in res2){
+                            for(atd in result){
+                                if(atd.data["class_code"] == cls.data["code"]){
+                                    data.add(ItemsViewModel(
+                                        "${cls.data["name"]}" +
+                                                "\n" +
+                                                "${atd.data["date"]}" +
+                                                "\n" +
+                                                "${atd.data["time"]}" +
+                                                "\n" +
+                                                "${getUserInfo(atd.data["uid"].toString())}"))
+                                }
+                            }
+                        }
+                        val adapter = CustomAdapter(data)
+                        rv_history_attendance.adapter = adapter
+                    }
+
+            }
+        // This will pass the ArrayList to our Adapter
+
+        // Setting the Adapter with the recyclerview
+    }
+
+    fun getUserInfo(uid:String): String? {
+            val user = Firebase.auth.currentUser
+            val email = user?.email
+            Toast.makeText(baseContext, "${email}",Toast.LENGTH_LONG).show()
+            return email
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -102,6 +162,23 @@ class MainActivity : AppCompatActivity() {
                                     var className = cls.data["name"].toString()
                                     Log.d("CLASSNAME", className)
                                     SharedVariables().changeName(className)
+
+                                    //Add attendance to database
+                                    val class_code = cls.data["code"].toString()
+                                    val date = convDate[0]
+                                    val time = convDate[1]
+                                    val uid = Firebase.auth.currentUser?.uid
+
+                                    val attendanceObj = Attendance(class_code, date, time, uid )
+                                    db.collection("attendance_history")
+                                        .add(attendanceObj)
+                                        .addOnSuccessListener { docRef ->
+                                            Log.d(TAG, "DocSnap written w/ id ${docRef.id}")
+                                        }
+                                        .addOnFailureListener{ e ->
+                                        Log.w(TAG, "Error adding doc", e)
+                                        }
+
                                     val intent = Intent(this, presentActivity::class.java)
                                     intent.putExtra("className", className)
                                     startActivity(intent)
@@ -124,4 +201,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
+
     }
