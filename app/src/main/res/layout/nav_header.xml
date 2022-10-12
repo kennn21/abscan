@@ -18,11 +18,15 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="Absen dengan mudah!"
+        android:fontFamily="@font/kgprimarypenmanship"
+        android:textSize="72px"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/header_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fx.sugirotok@president.ac.id" />
+        android:textSize="48px"
+        android:fontFamily="@font/kgprimarypenmanship"
+        android:text="by fx.sugirotok@president.ac.id" />
 </LinearLayout>
