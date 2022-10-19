@@ -69,7 +69,7 @@ class Login : AppCompatActivity() {
                 ).show()
             } else{
                 toggleLoad(loading)
-                performSignIn(email, password)
+                performSignIn(email, password, loading)
                 toggleLoad(loading)
             }
         } else {
@@ -80,7 +80,7 @@ class Login : AppCompatActivity() {
             ).show()
         }
     }
-    private fun performSignIn(email:String, password:String){
+    private fun performSignIn(email:String, password:String, loading: View){
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -89,6 +89,7 @@ class Login : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
+                    toggleLoad(loading)
                     // If sign in fails, display a message to the user.
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()

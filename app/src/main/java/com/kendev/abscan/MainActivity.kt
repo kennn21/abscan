@@ -10,6 +10,7 @@ import androidx.annotation.NonNull
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.size
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -110,12 +111,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                                     }
                                 }
                             }
-                            if(data.isEmpty()){
-                                data.add(ItemsViewModel("No attendance found!"))
-                            }
+
                         }
                         val adapter = CustomAdapter(data)
                         rv_history_attendance.adapter = adapter
+                        if(rv_history_attendance.size < 1){
+                            data.add(ItemsViewModel("No more attendance found.."))
+                        }
                     }
 
             }
