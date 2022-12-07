@@ -1,9 +1,9 @@
 package com.kendev.abscan.others
 
 class SharedVariables {
-    var class_name:String = ""
+    private var className:String = ""
 
     fun changeName(name:String){
-        class_name = name
+        className = name
     }
 }

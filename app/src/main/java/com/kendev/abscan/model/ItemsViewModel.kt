@@ -1,3 +1,3 @@
-package com.kendev.abscan
+package com.kendev.abscan.model
 
 data class ItemsViewModel(val text:String){}

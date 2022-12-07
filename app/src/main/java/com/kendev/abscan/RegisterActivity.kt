@@ -13,9 +13,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.kendev.abscan.model.newUser
 
 
-class RegisterUser : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
     private lateinit var rdb: DatabaseReference
     private lateinit var auth: FirebaseAuth
     val database = Firebase.database
@@ -33,7 +34,7 @@ class RegisterUser : AppCompatActivity() {
 
         val button_login:TextView = findViewById(R.id.button_hasaccount)
         button_login.setOnClickListener(){
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 

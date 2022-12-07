@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#F4F4F4"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -26,10 +27,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="15dp"
             android:text="Item"
+            android:textColor="@color/dark_blue"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/kgprimarypenmanship"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 

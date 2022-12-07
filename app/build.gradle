@@ -36,6 +36,10 @@ android {
 }
 
 dependencies {
+    //zxing
+    implementation 'com.journeyapps:zxing-android-embedded:3.0.2@aar'
+    implementation 'com.google.zxing:core:3.2.0'
+
     // for adding recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
 

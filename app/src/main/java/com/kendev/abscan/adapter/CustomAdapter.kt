@@ -1,9 +1,11 @@
-package com.kendev.abscan
+package com.kendev.abscan.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.kendev.abscan.R
+import com.kendev.abscan.model.ItemsViewModel
 
 class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 

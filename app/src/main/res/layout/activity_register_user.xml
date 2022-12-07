@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/scrollView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    tools:context=".RegisterUser"
-    >
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".RegisterActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wideview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/title"
@@ -26,8 +25,7 @@
             app:layout_constraintBottom_toTopOf="@+id/input_email"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <EditText
@@ -37,29 +35,29 @@
             android:backgroundTint="@color/blue"
             android:fontFamily="@font/kgprimarypenmanship"
             android:hint="Enter email.."
+            android:textColorHint="@color/gray"
             android:inputType="textEmailAddress"
             android:textColor="@color/blue"
             android:textSize="72px"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/input_password"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            app:layout_constraintTop_toBottomOf="@+id/input_email"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:backgroundTint="@color/blue"
+            android:fontFamily="@font/kgprimarypenmanship"
             android:hint="Enter password.."
+            android:textColorHint="@color/gray"
             android:inputType="textPassword"
             android:textColor="@color/blue"
             android:textSize="72px"
-            android:fontFamily="@font/kgprimarypenmanship"
-            android:backgroundTint="@color/blue"
-            />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_email" />
 
         <EditText
             android:id="@+id/input_fullname"
@@ -68,6 +66,7 @@
             android:backgroundTint="@color/blue"
             android:fontFamily="@font/kgprimarypenmanship"
             android:hint="Enter full name"
+            android:textColorHint="@color/gray"
             android:inputType="textPersonName"
             android:textColor="@color/blue"
             android:textSize="72px"
@@ -79,16 +78,16 @@
             android:id="@+id/input_nim"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            app:layout_constraintTop_toBottomOf="@+id/input_fullname"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:backgroundTint="@color/blue"
+            android:fontFamily="@font/kgprimarypenmanship"
             android:hint="Enter NIM"
+            android:textColorHint="@color/gray"
             android:inputType="textPersonName"
             android:textColor="@color/blue"
             android:textSize="72px"
-            android:fontFamily="@font/kgprimarypenmanship"
-            android:backgroundTint="@color/blue"
-            />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_fullname" />
 
         <Button
             android:id="@+id/button_signup"
@@ -105,41 +104,40 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/button_signup"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:columnCount="1"
-            android:rowCount="1"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            >
+            android:columnCount="1"
+            android:rowCount="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_signup">
+
             <TextView
                 android:id="@+id/button_hasaccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
                 android:layout_row="0"
-                android:layout_columnSpan="1"
                 android:layout_rowSpan="1"
+                android:layout_column="0"
+                android:layout_columnSpan="1"
                 android:fontFamily="@font/kgprimarypenmanship"
                 android:text="Already has an account?"
-                android:textSize="64px"
-                />
+                android:textColor="@color/dark_blue"
+                android:textSize="64px" />
         </GridLayout>
 
         <ProgressBar
             android:id="@+id/image_loading"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/blue"
+            android:indeterminateTint="@color/blue"
+            android:progressTint="@color/blue"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:visibility="invisible"
-            android:indeterminateTint="@color/blue"
-            android:backgroundTint="@color/blue"
-            android:progressTint="@color/blue"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

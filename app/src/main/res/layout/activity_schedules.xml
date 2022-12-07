@@ -4,45 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
-    >
+    android:background="#FFFFFF"
+    tools:context=".SplashActivity">
 
     <ListView
         android:id="@+id/list_schedules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        android:cacheColorHint="@color/dark_blue"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <GridLayout
         android:id="@+id/button_back_to_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:columnCount="2"
+        android:layout_margin="12dp"
+        android:background="@drawable/round_rect_shape"
+        android:backgroundTint="@color/blue"
+        android:columnCount="1"
         android:padding="10dp"
         android:rowCount="1"
-        app:layout_constraintTop_toBottomOf="@+id/list_schedules"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="24dp"
-        >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:background="@drawable/signout"
-            android:backgroundTint="@color/blue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/kgprimarypenmanship"
-            android:text="Back"
-            android:textColor="@color/blue"
-            android:textSize="16dp" />
+            android:backgroundTint="@color/white" />
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

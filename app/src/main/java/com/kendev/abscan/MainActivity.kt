@@ -20,6 +20,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.zxing.integration.android.IntentIntegrator
+import com.kendev.abscan.adapter.CustomAdapter
+import com.kendev.abscan.model.AttendanceModel
+import com.kendev.abscan.model.ItemsViewModel
 import com.kendev.abscan.others.SharedVariables
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         auth = Firebase.auth
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            var intent = Intent(this, Login::class.java)
+            var intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
@@ -60,18 +63,18 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         //getuserinfo
         val scanButton:LinearLayout = findViewById(R.id.button_checkin)
-        scanButton.setOnClickListener({
+        scanButton.setOnClickListener {
             val intentIntegrator = IntentIntegrator(this)
             intentIntegrator.setDesiredBarcodeFormats(listOf(IntentIntegrator.QR_CODE))
             intentIntegrator.setCameraId(0)
             intentIntegrator.setOrientationLocked(false)
             intentIntegrator.initiateScan()
-        })
+        }
 
         val button_signout = findViewById<GridLayout>(R.id.button_signout)
         button_signout.setOnClickListener(){
             FirebaseAuth.getInstance().signOut();
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
@@ -100,14 +103,16 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                                     val user = Firebase.auth.currentUser
                                     val currUid = user?.uid
                                     if(atd.data["uid"].toString() == currUid.toString()){
-                                        data.add(ItemsViewModel(
+                                        data.add(
+                                            ItemsViewModel(
                                             "${cls.data["name"]}" +
                                                     "\n" +
                                                     "${atd.data["date"]}" +
                                                     "\n" +
                                                     "${atd.data["time"]}" +
                                                     "\n" +
-                                                    "${getUserInfo(atd.data["uid"].toString())}"))
+                                                    "${getUserInfo(atd.data["uid"].toString())}")
+                                        )
                                     }
                                 }
                             }
@@ -136,7 +141,11 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(@NonNull item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_user -> {
-                val intent = Intent(this, UserActivity::class.java)
+                val intent = Intent(this, UserProfileActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_admin -> {
+                val intent = Intent(this, AdminActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -216,7 +225,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                                     val time = convDate[1]
                                     val uid = Firebase.auth.currentUser?.uid
 
-                                    val attendanceObj = Attendance(class_code, date, time, uid )
+                                    val attendanceObj = AttendanceModel(class_code, date, time, uid )
                                     db.collection("attendance_history")
                                         .add(attendanceObj)
                                         .addOnSuccessListener { docRef ->
@@ -226,7 +235,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                                         Log.w(TAG, "Error adding doc", e)
                                         }
 
-                                    val intent = Intent(this, presentActivity::class.java)
+                                    val intent = Intent(this, PresentActivity::class.java)
                                     intent.putExtra("className", className)
                                     startActivity(intent)
                                 } else{

@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.ktx.Firebase
 
 
-class UserActivity : AppCompatActivity() {
+class UserProfileActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,13 +42,13 @@ class UserActivity : AppCompatActivity() {
 
             if (it.exists()){
 
-                val fullname = it.child("fullname").value
-                val nim = it.child("nim").value
-                val email = it.child("email").value
+                val fullname = "name: ${it.child("fullname").value}"
+                val nim = "nim: ${it.child("nim").value}"
+                val email = "email: ${ it.child("email").value }"
 //                Toast.makeText(this,"Successfuly Read",Toast.LENGTH_SHORT).show()
-                tvname.text = fullname.toString()
-                tvnim.text = nim.toString()
-                tvemail.text = email.toString()
+                tvname.text = fullname
+                tvnim.text = nim
+                tvemail.text = email
 
             }else{
 

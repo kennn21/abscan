@@ -40,6 +40,8 @@ class SchedulesActivity : AppCompatActivity() {
             "Data Structure and Algorithm"
         )
 
+
+
         val adapter: ArrayAdapter<String?> = ArrayAdapter<String?>(
             this@SchedulesActivity,
             android.R.layout.simple_list_item_1,
@@ -68,7 +70,7 @@ class SchedulesActivity : AppCompatActivity() {
             classes.get()
                 .addOnSuccessListener(){ result ->
                     for(cls in result){
-                        var clsID = getLastNCharsOfString(cls.data["code"].toString(), 1);
+                        var clsID = getLastNCharsOfString(cls.data["code"].toString(), position);
                             if((id+1).toString() == clsID){
                                 AlertDialog.Builder(this)
                                     .setMessage("${cls.data["name"]}\n" +

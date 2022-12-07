@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserActivity">
+    android:background="#FFFFFF"
+    tools:context=".UserProfileActivity">
 
     <ImageView
         android:layout_width="320px"
         android:layout_height="320px"
         android:src="@drawable/ic_baseline_person_24"
-        app:tint="@color/blue"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/wrapper_user_info"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue" />
 
     <GridLayout
         android:id="@+id/wrapper_user_info"
@@ -34,10 +34,11 @@
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="0"
+            android:textColor="@color/dark_blue"
             android:fontFamily="@font/kgprimarypenmanship"
             android:text="Name"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
 
         <TextView
             android:id="@+id/email"
@@ -47,8 +48,9 @@
             android:layout_column="0"
             android:fontFamily="@font/kgprimarypenmanship"
             android:text="email"
+            android:textColor="@color/dark_blue"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
 
         <TextView
             android:id="@+id/nim"
@@ -57,11 +59,10 @@
             android:layout_row="2"
             android:layout_column="0"
             android:fontFamily="@font/kgprimarypenmanship"
-
             android:text="nim"
-
+            android:textColor="@color/dark_blue"
             android:textAlignment="center"
-            android:textSize="24sp" />
+            android:textSize="48sp" />
     </GridLayout>
 
 
