@@ -152,7 +152,7 @@ class AdminActivity : AppCompatActivity() {
                         cls.id == selected
                     ) {
                         var newCode = randomAlphaNumericString(10)
-                        var newQr = generateQr(cls.data["code"].toString())
+                        var newQr = generateQr(newCode)
 
                         db.collection("classes").document(cls.id).update("code", newCode)
                         ivQr.setImageBitmap(newQr)

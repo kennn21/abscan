@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                                                     "\n" +
                                                     "${atd.data["time"]}" +
                                                     "\n" +
-                                                    "${getUserInfo(atd.data["uid"].toString())}")
+                                                    "${getUserEmail()}")
                                         )
                                     }
                                 }
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         // Setting the Adapter with the recyclerview
     }
 
-    fun getUserInfo(uid:String): String? {
+    fun getUserEmail(): String? {
             val user = Firebase.auth.currentUser
             val email = user?.email
 //            Toast.makeText(baseContext, "${email}",Toast.LENGTH_LONG).show()
@@ -188,7 +188,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     private fun doAttendance(code:String) {
         val db = Firebase.firestore
         val classes = db.collection("classes")
-
         classes.get()
             .addOnSuccessListener { result ->
                 for (cls in result) {
@@ -230,14 +229,18 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                                         .add(attendanceObj)
                                         .addOnSuccessListener { docRef ->
                                             Log.d(TAG, "DocSnap written w/ id ${docRef.id}")
+                                            val intent = Intent(this, PresentActivity::class.java)
+                                            intent.putExtra("className", className)
+                                            startActivity(intent)
                                         }
                                         .addOnFailureListener{ e ->
                                         Log.w(TAG, "Error adding doc", e)
+                                            val intent = Intent(this, MainActivity::class.java)
+                                            startActivity(intent)
                                         }
-
-                                    val intent = Intent(this, PresentActivity::class.java)
-                                    intent.putExtra("className", className)
+                                    val intent = Intent(this, MainActivity::class.java)
                                     startActivity(intent)
+
                                 } else{
                                     Toast.makeText(baseContext,"Now is "+convDate[1]+". You should come before "+ cls.data["time_end"],Toast.LENGTH_LONG).show()
                                 }
